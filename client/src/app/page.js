@@ -8,6 +8,10 @@ export default function Home() {
   const [haveSubmitted, setHaveSubmitted] = useState(false);
 
   const [userData, setUserData] = useState({
+    firstName: "",
+    lastName: "",
+    dob: "",
+    email: "",
     gender: "",
     phoneNumber: "",
     religion: "",
@@ -63,6 +67,9 @@ export default function Home() {
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/update`;
 
     let body = {
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      dob: userData.dob,
       email: localStorage.getItem("email"),
       gender: userData.gender,
       phoneNumber: userData.phoneNumber,
@@ -126,7 +133,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-300 mb-10 items-center">
+    <div className="flex flex-col min-h-screen mb-10 items-center">
       <div className="flex flex-row w-full">
         <div className="flex w-full  justify-end text-white my-5">
           <div
@@ -146,15 +153,94 @@ export default function Home() {
         </div>
       </div>
       {haveSubmitted ? (
-        <div className="text-black flex items-center h-full  text-2xl font-bold">
+        <div className="text-white flex items-center min-h-screen   text-2xl font-bold">
           You have Submitted the Data
         </div>
       ) : (
         <form onSubmit={submitUserData} className="w-full max-w-lg">
+          <div className="flex flex-wrap -mx-3 mb-6 font-bold text-2xl text-white">
+            STUDENT DETAILS
+          </div>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
+                htmlFor="grid-firstName"
+              >
+                First Name<span className="text-red-600">*</span>
+              </label>
+              <input
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-firstName"
+                name="firstName"
+                value={userData.firstName}
+                onChange={handleChange}
+                type="text"
+                placeholder="First Name"
+              />
+            </div>
+          </div>
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full px-3">
+              <label
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
+                htmlFor="grid-lastName"
+              >
+                Last Name<span className="text-red-600">*</span>
+              </label>
+              <input
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-lastName"
+                name="lastName"
+                value={userData.lastName}
+                onChange={handleChange}
+                type="text"
+                placeholder="Last Name"
+              />
+            </div>
+          </div>
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full px-3">
+              <label
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
+                htmlFor="grid-dob"
+              >
+                Date Of Birth<span className="text-red-600">*</span>
+              </label>
+              <input
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-dob"
+                name="dob"
+                value={userData.dob}
+                onChange={handleChange}
+                type="text"
+                placeholder="01/01/2001"
+              />
+            </div>
+          </div>
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full px-3">
+              <label
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
+                htmlFor="grid-email"
+              >
+                email<span className="text-red-600">*</span>
+              </label>
+              <input
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-email"
+                name="email"
+                value={userData.email}
+                onChange={handleChange}
+                type="email"
+                placeholder="email"
+              />
+            </div>
+          </div>
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full px-3">
+              <label
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-gender"
               >
                 Gender<span className="text-red-600">*</span>
@@ -173,7 +259,7 @@ export default function Home() {
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-phoneNumber"
               >
                 Phone Number<span className="text-red-600">*</span>
@@ -192,7 +278,7 @@ export default function Home() {
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-religion"
               >
                 Religion<span className="text-red-600">*</span>
@@ -211,7 +297,7 @@ export default function Home() {
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-community"
               >
                 Community<span className="text-red-600">*</span>
@@ -230,7 +316,7 @@ export default function Home() {
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-caste"
               >
                 Caste<span className="text-red-600">*</span>
@@ -249,7 +335,7 @@ export default function Home() {
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-bloodGroup"
               >
                 Blood Group<span className="text-red-600">*</span>
@@ -268,7 +354,7 @@ export default function Home() {
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-goals"
               >
                 Goals
@@ -284,13 +370,13 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="flex flex-wrap -mx-3 mb-6 font-bold text-2xl">
+          <div className="flex flex-wrap -mx-3 mb-6 font-bold text-2xl text-white">
             ACADEMICS
           </div>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-sslcSchool"
               >
                 SSLC SCHOOL NAME<span className="text-red-600">*</span>
@@ -307,7 +393,7 @@ export default function Home() {
             </div>
             <div className="w-full md:w-1/2 px-3">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-sslcPercentage"
               >
                 SSLC PERCENTAGE<span className="text-red-600">*</span>
@@ -326,7 +412,7 @@ export default function Home() {
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-hscSchool"
               >
                 HSC SCHOOL NAME<span className="text-red-600">*</span>
@@ -343,7 +429,7 @@ export default function Home() {
             </div>
             <div className="w-full md:w-1/2 px-3">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-hscPercentage"
               >
                 HSC PERCENTAGE<span className="text-red-600">*</span>
@@ -362,7 +448,7 @@ export default function Home() {
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-ugSchool"
               >
                 UG SCHOOL NAME<span className="text-red-600">*</span>
@@ -379,7 +465,7 @@ export default function Home() {
             </div>
             <div className="w-full md:w-1/2 px-3">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-ugPercentage"
               >
                 UG PERCENTAGE<span className="text-red-600">*</span>
@@ -395,13 +481,13 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="flex flex-wrap -mx-3 mb-6 font-bold text-2xl">
+          <div className="flex flex-wrap -mx-3 mb-6 font-bold text-2xl text-white">
             Family
           </div>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-fatherName"
               >
                 FATHER NAME<span className="text-red-600">*</span>
@@ -418,7 +504,7 @@ export default function Home() {
             </div>
             <div className="w-full md:w-1/2 px-3">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-fatherOccupation"
               >
                 FATHER OCCUPATION<span className="text-red-600">*</span>
@@ -435,7 +521,7 @@ export default function Home() {
             </div>
             <div className="w-full md:w-1/2 px-3">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-fatherQualification"
               >
                 FATHER HIGHEST QUALIFICATION
@@ -455,7 +541,7 @@ export default function Home() {
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-motherName"
               >
                 MOTHER NAME<span className="text-red-600">*</span>
@@ -472,7 +558,7 @@ export default function Home() {
             </div>
             <div className="w-full md:w-1/2 px-3">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-motherOccupation"
               >
                 MOTHER OCCUPATION<span className="text-red-600">*</span>
@@ -489,7 +575,7 @@ export default function Home() {
             </div>
             <div className="w-full md:w-1/2 px-3">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-motherQualification"
               >
                 MOTHER HIGHEST QUALIFICATION
@@ -509,7 +595,7 @@ export default function Home() {
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-familyIncome"
               >
                 FAMILY INCOME<span className="text-red-600">*</span>
@@ -526,7 +612,7 @@ export default function Home() {
             </div>
             <div className="w-full md:w-1/2 px-3">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-brotherName"
               >
                 BROTHER NAME if any
@@ -543,7 +629,7 @@ export default function Home() {
             </div>
             <div className="w-full md:w-1/2 px-3">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-sisterName"
               >
                 SISTER NAME if any

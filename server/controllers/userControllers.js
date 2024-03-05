@@ -66,10 +66,6 @@ const updateUser = async (req, res) => {
   user = await tryCatch(User.findOne({ email: req.body.email }));
   if (user?.notOkay) return res.status(500).json(user?.error);
   let userData = {
-    firstName: user.firstName,
-    lastName: user.lastName,
-    dob: user.dob,
-    email: user.email,
     password: user.password,
     ...updateData,
   };
