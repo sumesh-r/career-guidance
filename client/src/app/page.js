@@ -6,6 +6,24 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const router = useRouter();
   const [haveSubmitted, setHaveSubmitted] = useState(false);
+  const [course, setCourse] = useState("Choose an Option");
+  const [courses, setCourses] = useState([
+    "AIML",
+    "AIDS",
+    "CSE",
+    "IT",
+    "ECE",
+    "EEE",
+    "AERO",
+    "FOOD TECH",
+    "CIVIL",
+    "AGRI",
+    "MECH",
+    "CHEMICAL",
+    "AUTO MOBILE",
+    "MECHATRONICS",
+    "BIO MEDICAL",
+  ]);
 
   const [userData, setUserData] = useState({
     firstName: "",
@@ -23,8 +41,6 @@ export default function Home() {
     sslcPercentage: "",
     hscSchool: "",
     hscPercentage: "",
-    ugSchool: "",
-    ugPercentage: "",
     fatherName: "",
     fatherOccupation: "",
     fatherQualification: "",
@@ -76,6 +92,7 @@ export default function Home() {
       religion: userData.religion,
       community: userData.community,
       caste: userData.caste,
+      course: course,
       bloodGroup: userData.bloodGroup,
       goals: userData.goals,
       academics: {
@@ -83,8 +100,6 @@ export default function Home() {
         sslcPercentage: userData.sslcPercentage,
         hscSchool: userData.hscSchool,
         hscPercentage: userData.hscPercentage,
-        ugSchool: userData.ugSchool,
-        ugPercentage: userData.ugPercentage,
       },
       family: {
         fatherName: userData.fatherName,
@@ -117,6 +132,17 @@ export default function Home() {
 
   const handleChange = ({ currentTarget: input }) => {
     setUserData({ ...userData, [input.name]: input.value });
+    if ([input.name] == "hscPercentage") {
+      if (Number(input.value) >= 92) {
+        setCourses(["AIML", "AIDS", "CSE", "IT"]);
+      } else if (Number(input.value) >= 85) {
+        setCourses(["ECE", "EEE", "AERO", "FOOD TECH"]);
+      } else if (Number(input.value) >= 75) {
+        setCourses(["CIVIL", "AGRI", "MECH", "CHEMICAL"]);
+      } else {
+        setCourses(["AUTO MOBILE", "MECHATRONICS", "BIO MEDICAL"]);
+      }
+    }
   };
 
   useEffect(() => {
@@ -444,41 +470,44 @@ export default function Home() {
                 placeholder="HSC PERCENTAGE"
               />
             </div>
-          </div>
-          <div className="flex flex-wrap -mx-3 mb-6">
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <div className="w-full md:w-1/2 mt-7 px-3">
               <label
-                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-                htmlFor="grid-ugSchool"
+                className="block uppercase tracking-wide text-white text-md font-bold mb-2"
+                htmlFor="grid-course"
               >
-                UG SCHOOL NAME<span className="text-red-600">*</span>
+                COURSE<span className="text-red-600">*</span>
               </label>
-              <input
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                id="grid-ugSchool"
-                name="ugSchool"
-                value={userData.ugSchool}
-                onChange={handleChange}
-                type="text"
-                placeholder="SCHOOL NAME"
-              />
-            </div>
-            <div className="w-full md:w-1/2 px-3">
-              <label
-                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-                htmlFor="grid-ugPercentage"
-              >
-                UG PERCENTAGE<span className="text-red-600">*</span>
-              </label>
-              <input
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                id="grid-ugPercentage"
-                name="ugPercentage"
-                value={userData.ugPercentage}
-                onChange={handleChange}
-                type="text"
-                placeholder="UG PERCENTAGE"
-              />
+              <div className="w-full px-3  md:mb-0">
+                <div className="relative">
+                  <select
+                    className="block text-center appearance-none w-full
+                                  border border-white
+                                  text-[#666666] py-3 px-4 pr-5 rounded"
+                    value={course}
+                    onChange={({ currentTarget: input }) => {
+                      setCourse(input.value);
+                    }}
+                    name="course"
+                  >
+                    <option>Choose an option</option>
+                    {courses.map((course, index) => {
+                      return <option key={index}>{course}</option>;
+                    })}
+                  </select>
+                  <div
+                    className="pointer-events-none absolute inset-y-0
+                               right-0 flex items-center px-2 text-gray-700"
+                  >
+                    <svg
+                      className="fill-current h-4 w-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div className="flex flex-wrap -mx-3 mb-6 font-bold text-2xl text-white">
@@ -645,6 +674,24 @@ export default function Home() {
               />
             </div>
           </div>
+          {/* <div className="flex flex-wrap -mx-3 mb-6 font-bold text-2xl text-white">
+            COURSE RECOMENDATION
+          </div>
+          <div className="w-full space-y-2  px-3">
+            <div className="text-white font-bold">
+              • 92-100 in 12th: AIML, AIDS, CSE, IT
+            </div>
+            <div className="text-white font-bold">
+              • 85-91 in 12th: ECE,EEE, AERO, FOOD TECH
+            </div>
+            <div className="text-white font-bold">
+              • 75-84 in 12th: CIVIL, AGRI, MECH, CHEMICAL
+            </div>
+            <div className="text-white font-bold">
+              • 60-74 in 12th: AUTO MOBILE, MECHATRONICS, BIO MEDICAL
+            </div>
+          </div> */}
+
           <div className="flex  justify-end text-white my-5">
             <button
               type="submit"

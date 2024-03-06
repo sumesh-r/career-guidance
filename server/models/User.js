@@ -11,6 +11,7 @@ const userSchema = mongoose.Schema(
     phoneNumber: { type: String },
     religion: { type: String },
     community: { type: String },
+    course: { type: String },
     caste: { type: String },
     bloodGroup: { type: String },
     academics: {
@@ -18,8 +19,6 @@ const userSchema = mongoose.Schema(
       sslcPercentage: { type: String },
       hscSchool: { type: String },
       hscPercentage: { type: String },
-      ugSchool: { type: String },
-      ugPercentage: { type: String },
     },
     family: {
       fatherName: { type: String },
@@ -32,7 +31,7 @@ const userSchema = mongoose.Schema(
       brotherName: { type: String },
       sisterName: { type: String },
     },
-    goals: { type: String }
+    goals: { type: String },
   },
   { versionKey: false }
 );
