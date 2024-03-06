@@ -48,8 +48,7 @@ export default function Home() {
     motherOccupation: "",
     motherQualification: "",
     familyIncome: "",
-    brotherName: "",
-    sisterName: "",
+    siblingName: "",
   });
 
   const logout = async () => {
@@ -109,8 +108,7 @@ export default function Home() {
         motherOccupation: userData.motherOccupation,
         motherQualification: userData.motherQualification,
         familyIncome: userData.familyIncome,
-        brotherName: userData.brotherName,
-        sisterName: userData.sisterName,
+        siblingName: userData.siblingName,
       },
     };
 
@@ -644,33 +642,16 @@ export default function Home() {
                 className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                 htmlFor="grid-brotherName"
               >
-                BROTHER NAME if any
+                SIBLING NAME if any
               </label>
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                id="grid-brotherName"
-                name="brotherName"
-                value={userData.brotherName}
+                id="grid-siblingName"
+                name="siblingName"
+                value={userData.siblingName}
                 onChange={handleChange}
                 type="text"
-                placeholder="BROTHER NAME"
-              />
-            </div>
-            <div className="w-full md:w-1/2 px-3">
-              <label
-                className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-                htmlFor="grid-sisterName"
-              >
-                SISTER NAME if any
-              </label>
-              <input
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                id="grid-sisterName"
-                name="sisterName"
-                value={userData.sisterName}
-                onChange={handleChange}
-                type="text"
-                placeholder="SISTER NAME"
+                placeholder="SIBLING NAME"
               />
             </div>
           </div>

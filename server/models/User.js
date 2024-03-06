@@ -28,8 +28,7 @@ const userSchema = mongoose.Schema(
       motherOccupation: { type: String },
       motherQualification: { type: String },
       familyIncome: { type: String },
-      brotherName: { type: String },
-      sisterName: { type: String },
+      siblingName: { type: String }
     },
     goals: { type: String },
   },
